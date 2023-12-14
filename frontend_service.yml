@@ -6,7 +6,7 @@ metadata:
 spec:
   type: NodePort
   externalIPs:
-  - 10.0.219.12
+  - xx.xx.xx.xx
   selector:
     app: tms-frontend
   ports:
