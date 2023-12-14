@@ -1,0 +1,32 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  namespace: uat-namespace
+spec:
+  # replicas: 4
+  selector:
+    matchLabels:
+      app: tms-frontend
+  template:
+    metadata:
+      labels:
+        app: tms-frontend
+    spec:
+      imagePullSecrets:
+      - name: harbor-frontend-credentials
+      containers:
+      - name: tms-frontend
+        image: 10.0.200.204:7200/trainee/frontend:0.0.48-dev
+        imagePullPolicy: Always
+        resources:
+          requests:
+           cpu: "500m"
+        ports:
+        - containerPort: 80
+        env:
+        - name: BACKEND_URL
+          value: "http://10.0.218.158:30002"
+      nodeName: apduatsvmtsfe01
